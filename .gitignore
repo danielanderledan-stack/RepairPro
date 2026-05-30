@@ -2,3 +2,4 @@ node_modules/
 _*.png
 _*.js
 package*.json
+Screenshot*.png
