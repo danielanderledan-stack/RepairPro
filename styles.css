@@ -28,21 +28,22 @@ body {
 }
 
 /* ===================== HERO ===================== */
+/* Sizes to its content (no forced 100svh) so there is no letterbox gap
+   above or below the image. The image is capped by the available height
+   so it stays "as big as fits lengthwise" without overflowing the fold. */
 .hero {
-  height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #fbfbfb;
-  padding: 18px 16px max(14px, env(safe-area-inset-bottom));
-  overflow: hidden;
+  padding: 18px 16px 6px;
 }
 
 .navbar {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   position: relative;
   z-index: 10;
   flex-shrink: 0;
@@ -130,18 +131,23 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  flex: 1;
-  min-height: 0;
+  /* Width is capped two ways: never wider than 94vw, and never so wide
+     that its height (width / aspect-ratio) exceeds the space left under
+     the nav. 1.5268 = 1168/765, the image's aspect ratio. */
+  max-width: min(94vw, calc((100svh - 108px) * 1.5268));
+  margin: 0 auto;
 }
 
 .hero-image {
   width: 100%;
-  max-width: 760px;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
+  height: auto;
   display: block;
-  filter: drop-shadow(0 22px 48px rgba(0, 0, 0, 0.12));
+  /* The grey backdrop is knocked out at source via Cloudinary's
+     e_make_transparent, so the image already sits on true transparency.
+     The only hard edge left is the wrist where it's clipped by the left
+     frame, so we feather just that edge to fade it into the page. */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 100%);
 }
 
 /* ============= PINNED HORIZONTAL SCROLL ============= */
@@ -289,17 +295,30 @@ body {
 
 /* ===================== RESPONSIVE ===================== */
 @media (min-width: 768px) {
-  .hero { padding: 26px 24px 22px; }
-  .navbar { margin-bottom: 18px; }
+  .hero { padding: 24px 24px 8px; }
+  .navbar { margin-bottom: 12px; }
+}
+
+/* Full-bleed image on mobile (soft feathered edges keep it from touching). */
+@media (max-width: 767px) {
+  .hero { padding: 16px 0 4px; }
+  .navbar { padding: 0 16px; }
+  .hero-image-wrap { max-width: 100%; }
 }
 
 @media (max-width: 900px) {
-  /* Keep the pinned sideways scroll on mobile; stack copy above the diagram. */
-  .panel { padding: 84px 24px 56px; }
+  /* Keep the pinned sideways scroll on mobile; stack copy above the diagram.
+     Top-align the content (rather than centering it in the tall panel) so the
+     first panel flows right under the short hero instead of leaving a big
+     empty band above "Set price". */
+  .panel {
+    align-items: flex-start;
+    padding: 72px 24px 56px;
+  }
   .panel-inner {
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 18px;
     max-width: 100%;
   }
