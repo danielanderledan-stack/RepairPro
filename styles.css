@@ -8,7 +8,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f9f9f9;
+  background: #fbfbfb;
   color: #1d1d1f;
 }
 
@@ -17,7 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f9f9f9;
+  background: #fbfbfb;
   padding: 22px 16px 0;
   overflow: hidden;
 }
@@ -75,6 +75,21 @@ body {
   width: 19px;
   height: 19px;
   fill: #ffffff;
+}
+
+/* Outlined variant — transparent circle with black stroked icon */
+.nav-icon--outline {
+  background: transparent;
+  border: 1.5px solid rgba(29, 29, 31, 0.82);
+}
+
+.nav-icon--outline:hover {
+  background: rgba(0, 0, 0, 0.05);
+  opacity: 1;
+}
+
+.nav-icon--outline svg {
+  fill: none;
 }
 
 .nav-text {
