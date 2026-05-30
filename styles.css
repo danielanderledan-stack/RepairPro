@@ -12,13 +12,14 @@ body {
   color: #1d1d1f;
 }
 
+/* The hero is designed to fill exactly one screen, mobile-first. */
 .hero {
-  min-height: 100svh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #fbfbfb;
-  padding: 22px 16px 0;
+  padding: 18px 16px max(14px, env(safe-area-inset-bottom));
   overflow: hidden;
 }
 
@@ -27,9 +28,10 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   position: relative;
   z-index: 10;
+  flex-shrink: 0;
 }
 
 .nav-pill {
@@ -141,47 +143,99 @@ body {
 /* ---------- Hero image ---------- */
 .hero-image-wrap {
   width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
+  flex-shrink: 1;
+  min-height: 0;
 }
 
 .hero-image {
   width: 100%;
-  height: auto;
-  /* Cap by viewport height so the whole image fits lengthwise on the page */
-  max-height: calc(100svh - 90px);
+  max-width: 640px;
+  height: 100%;
   object-fit: contain;
+  object-position: center;
   display: block;
-  filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.12));
+  filter: drop-shadow(0 22px 48px rgba(0, 0, 0, 0.12));
 }
 
-/* Almost full-width on desktop, but never taller than the viewport allows */
+/* ---------- Pitch section ---------- */
+.pitch {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: clamp(12px, 2.4vh, 22px);
+}
+
+.pitch-line {
+  text-align: center;
+  font-size: clamp(20px, 5.4vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #1d1d1f;
+}
+
+.pitch-line--end {
+  font-weight: 500;
+  color: #6e6e73;
+}
+
+/* ---------- Scroll-snap tiles ---------- */
+.tiles {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  padding: 6px 4px 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Mandatory snapping gives the "sticky" feel: release mid-scroll and it
+     settles forward or back onto the nearest tile. */
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tiles::-webkit-scrollbar {
+  display: none;
+}
+
+.tile {
+  flex: 0 0 auto;
+  width: min(74vw, 280px);
+  aspect-ratio: 4 / 3;
+  max-height: 22svh;
+  border-radius: 22px;
+  background: #ffffff;
+  scroll-snap-align: center;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* ---------- Desktop ---------- */
 @media (min-width: 768px) {
   .hero {
-    padding: 26px 24px 0;
+    padding: 26px 24px 22px;
   }
   .navbar {
-    margin-bottom: 22px;
-  }
-  .hero-image-wrap {
-    max-width: 92vw;
-  }
-}
-
-/* Full-width edge-to-edge on mobile */
-@media (max-width: 767px) {
-  .hero {
-    padding: 18px 0 0;
-  }
-  .navbar {
-    padding: 0 16px;
-  }
-  .hero-image-wrap {
-    max-width: 100%;
+    margin-bottom: 18px;
   }
   .hero-image {
-    max-height: none;
+    max-width: 900px;
+  }
+  .pitch-line {
+    font-size: clamp(26px, 2.4vw, 38px);
+  }
+  .tile {
+    width: 300px;
+    max-height: 26svh;
   }
 }
