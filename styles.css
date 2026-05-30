@@ -724,6 +724,19 @@ a.nav-text { display: inline-flex; align-items: center; }
 }
 .hours li:last-child { border-bottom: none; }
 .map-card .btn { margin-top: 10px; }
+.map-google-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy-soft);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+.map-google-link svg { color: #f5a623; flex-shrink: 0; }
+.map-google-link:hover { color: var(--theme-deep); }
 
 /* ---------- Directions: nearby ---------- */
 .nearby-grid {
