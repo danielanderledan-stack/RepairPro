@@ -1,18 +1,33 @@
+:root {
+  /* Palette borrowed from completedigital.org */
+  --theme: #48cae4;
+  --theme-deep: #00a8cf;
+  --theme-soft: #ade8f4;
+  --navy: #0a2540;
+  --navy-soft: #41566b;
+  --ink-faint: #6b7f93;
+  --paper: #f6fbfd;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #fbfbfb;
   color: #1d1d1f;
 }
 
-/* The hero is designed to fill exactly one screen, mobile-first. */
+/* ===================== HERO ===================== */
 .hero {
   height: 100svh;
   display: flex;
@@ -23,7 +38,6 @@ body {
   overflow: hidden;
 }
 
-/* ---------- Navigation pill ---------- */
 .navbar {
   width: 100%;
   display: flex;
@@ -64,14 +78,8 @@ body {
   transition: opacity 0.18s ease, transform 0.14s ease;
 }
 
-.nav-icon:hover {
-  opacity: 0.82;
-}
-
-.nav-icon:active {
-  transform: scale(0.93);
-  opacity: 0.7;
-}
+.nav-icon:hover { opacity: 0.82; }
+.nav-icon:active { transform: scale(0.93); opacity: 0.7; }
 
 .nav-icon svg {
   width: 19px;
@@ -79,20 +87,12 @@ body {
   fill: #ffffff;
 }
 
-/* Outlined variant — transparent circle with black stroked icon */
 .nav-icon--outline {
   background: transparent;
   border: 1.5px solid rgba(29, 29, 31, 0.82);
 }
-
-.nav-icon--outline:hover {
-  background: rgba(0, 0, 0, 0.05);
-  opacity: 1;
-}
-
-.nav-icon--outline svg {
-  fill: none;
-}
+.nav-icon--outline:hover { background: rgba(0, 0, 0, 0.05); opacity: 1; }
+.nav-icon--outline svg { fill: none; }
 
 .nav-text {
   padding: 10px 18px;
@@ -105,16 +105,10 @@ body {
   letter-spacing: 0.01em;
   color: #1d1d1f;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease;
 }
-
-.nav-text:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.nav-text:active {
-  background: rgba(0, 0, 0, 0.09);
-}
+.nav-text:hover { background: rgba(0, 0, 0, 0.05); }
+.nav-text:active { background: rgba(0, 0, 0, 0.09); }
 
 .nav-contact {
   padding: 10px 22px;
@@ -129,29 +123,20 @@ body {
   cursor: pointer;
   transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
 }
+.nav-contact:hover { background: #1d1d1f; color: #ffffff; border-color: #1d1d1f; }
+.nav-contact:active { opacity: 0.82; }
 
-.nav-contact:hover {
-  background: #1d1d1f;
-  color: #ffffff;
-  border-color: #1d1d1f;
-}
-
-.nav-contact:active {
-  opacity: 0.82;
-}
-
-/* ---------- Hero image ---------- */
 .hero-image-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
-  flex-shrink: 1;
+  flex: 1;
   min-height: 0;
 }
 
 .hero-image {
   width: 100%;
-  max-width: 640px;
+  max-width: 760px;
   height: 100%;
   object-fit: contain;
   object-position: center;
@@ -159,83 +144,178 @@ body {
   filter: drop-shadow(0 22px 48px rgba(0, 0, 0, 0.12));
 }
 
-/* ---------- Pitch section ---------- */
-.pitch {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
+/* ============= PINNED HORIZONTAL SCROLL ============= */
+.scroller {
+  position: relative;
+}
+
+/* Tall spacer — its scroll length is converted into sideways travel by JS.
+   Height is set in script.js: 100vh + tileWidth * (panels - 1). */
+.scroller-track {
+  position: relative;
+}
+
+.scroller-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.scroller-rail {
   display: flex;
-  flex-direction: column;
+  height: 100svh;
+  will-change: transform;
+}
+
+.panel {
+  flex: 0 0 100vw;
+  height: 100svh;
+  display: flex;
   align-items: center;
-  flex-shrink: 0;
-  gap: clamp(12px, 2.4vh, 22px);
+  justify-content: center;
+  padding: 96px clamp(24px, 8vw, 100px) 64px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--paper) 100%);
 }
 
-.pitch-line {
-  text-align: center;
-  font-size: clamp(20px, 5.4vw, 30px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  color: #1d1d1f;
-}
-
-.pitch-line--end {
-  font-weight: 500;
-  color: #6e6e73;
-}
-
-/* ---------- Scroll-snap tiles ---------- */
-.tiles {
+.panel-inner {
+  max-width: 1100px;
   width: 100%;
   display: flex;
-  gap: 16px;
-  padding: 6px 4px 16px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  /* Mandatory snapping gives the "sticky" feel: release mid-scroll and it
-     settles forward or back onto the nearest tile. */
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 4px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  align-items: center;
+  gap: clamp(32px, 6vw, 80px);
 }
 
-.tiles::-webkit-scrollbar {
-  display: none;
+.panel-copy { flex: 1; min-width: 0; }
+
+.panel-num {
+  display: block;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  font-size: 0.77rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--theme-deep);
+  margin-bottom: 14px;
+  text-transform: uppercase;
 }
 
-.tile {
-  flex: 0 0 auto;
-  width: min(74vw, 280px);
-  aspect-ratio: 4 / 3;
-  max-height: 22svh;
-  border-radius: 22px;
-  background: #ffffff;
-  scroll-snap-align: center;
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.12),
-    0 4px 12px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+.panel-h {
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  margin-bottom: 12px;
 }
 
-/* ---------- Desktop ---------- */
+.accent {
+  position: relative;
+  color: var(--theme-deep);
+  background: linear-gradient(120deg, var(--theme-deep), var(--theme));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.panel-sub {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 600;
+  color: var(--navy-soft);
+  margin-bottom: 18px;
+  max-width: 32em;
+}
+
+.panel-p {
+  font-size: clamp(1rem, 1.35vw, 1.08rem);
+  line-height: 1.65;
+  color: var(--navy-soft);
+  max-width: 32em;
+}
+
+.panel-btn {
+  margin-top: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 100px;
+  border: none;
+  background: var(--navy);
+  color: #ffffff;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 14px 30px -12px rgba(10, 37, 64, 0.5);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.panel-btn svg { width: 17px; height: 17px; }
+.panel-btn:hover {
+  transform: translateY(-2px);
+  background: var(--theme-deep);
+  box-shadow: 0 18px 34px -12px rgba(0, 168, 207, 0.6);
+}
+.panel-btn:active { transform: translateY(0); }
+
+.panel-diagram {
+  flex: 0 0 clamp(150px, 28%, 250px);
+  color: var(--navy);
+  opacity: 0.72;
+}
+.panel-diagram svg { width: 100%; height: auto; display: block; }
+
+.scroller-dots {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  pointer-events: none;
+}
+.scroller-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(10, 37, 64, 0.15);
+  transition: background 0.3s, transform 0.3s;
+}
+.scroller-dot.active {
+  background: var(--theme-deep);
+  transform: scale(1.5);
+}
+
+/* ===================== RESPONSIVE ===================== */
 @media (min-width: 768px) {
-  .hero {
-    padding: 26px 24px 22px;
+  .hero { padding: 26px 24px 22px; }
+  .navbar { margin-bottom: 18px; }
+}
+
+@media (max-width: 900px) {
+  /* Keep the pinned sideways scroll on mobile; stack copy above the diagram. */
+  .panel { padding: 84px 24px 56px; }
+  .panel-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 18px;
+    max-width: 100%;
   }
-  .navbar {
-    margin-bottom: 18px;
+  .panel-diagram {
+    flex: 0 0 auto;
+    width: min(150px, 40vw);
+    align-self: center;
   }
-  .hero-image {
-    max-width: 900px;
-  }
-  .pitch-line {
-    font-size: clamp(26px, 2.4vw, 38px);
-  }
-  .tile {
-    width: 300px;
-    max-height: 26svh;
-  }
+}
+
+@media (max-width: 560px) {
+  .panel-h { font-size: clamp(1.7rem, 8vw, 2.3rem); }
+  .panel-p { font-size: 0.98rem; line-height: 1.58; }
+  .panel-diagram { width: min(132px, 36vw); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RepairPro — Care you can trust</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- ===================== HERO ===================== -->
     <section class="hero">
         <nav class="navbar">
             <div class="nav-pill">
@@ -33,19 +37,114 @@
                 class="hero-image"
             />
         </div>
+    </section>
 
-        <div class="pitch">
-            <h2 class="pitch-line">We cut the sh*t</h2>
+    <!-- ============= PINNED HORIZONTAL SCROLL ============= -->
+    <section class="scroller" id="why">
+        <div class="scroller-track">
+            <div class="scroller-pin">
+                <div class="scroller-rail">
 
-            <div class="tiles" role="list">
-                <div class="tile" role="listitem"></div>
-                <div class="tile" role="listitem"></div>
-                <div class="tile" role="listitem"></div>
-                <div class="tile" role="listitem"></div>
+                    <!-- 01 — Set price -->
+                    <article class="panel">
+                        <div class="panel-inner">
+                            <div class="panel-copy">
+                                <span class="panel-num">01&nbsp;/&nbsp;04</span>
+                                <h2 class="panel-h">Set <span class="accent">price.</span></h2>
+                                <p class="panel-sub">The number we quote is the number you pay.</p>
+                                <p class="panel-p">No mid-repair surprises, no “we found something else,” no padded labour. We diagnose it, tell you the full cost up front, and that's the price — even if the job turns out trickier than we expected. What we say is what you pay.</p>
+                            </div>
+                            <div class="panel-diagram" aria-hidden="true">
+                                <svg viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="24" y="40" width="150" height="120" rx="14" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="150" cy="66" r="9" stroke="currentColor" stroke-width="2"/>
+                                    <text x="46" y="96" font-size="13" fill="currentColor" opacity="0.55" font-family="Outfit, sans-serif">Repair total</text>
+                                    <text x="46" y="132" font-size="30" fill="currentColor" font-weight="700" font-family="Outfit, sans-serif">$120</text>
+                                    <rect x="120" y="118" width="58" height="44" rx="9" fill="rgba(72,202,228,0.14)" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M138 130v-5a8 8 0 0 1 16 0v5" stroke="currentColor" stroke-width="2"/>
+                                    <rect x="134" y="130" width="24" height="20" rx="4" fill="currentColor" opacity="0.7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 02 — 12 month warranty -->
+                    <article class="panel">
+                        <div class="panel-inner">
+                            <div class="panel-copy">
+                                <span class="panel-num">02&nbsp;/&nbsp;04</span>
+                                <h2 class="panel-h">12&nbsp;month <span class="accent">warranty.</span></h2>
+                                <p class="panel-sub">If we touched it and it fails, we make it right.</p>
+                                <p class="panel-p">Every repair is backed for a full twelve months. If a part we fitted or a fix we made gives out and the fault is ours, you bring it straight back and we sort it — no charge, no hassle, no fine print. We stand behind our work long after you've left the counter.</p>
+                            </div>
+                            <div class="panel-diagram" aria-hidden="true">
+                                <svg viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 28l64 22v44c0 40-28 62-64 76-36-14-64-36-64-76V50l64-22z" stroke="currentColor" stroke-width="2" fill="rgba(72,202,228,0.08)"/>
+                                    <path d="M74 100l18 18 36-40" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <text x="100" y="172" font-size="13" fill="currentColor" font-weight="600" text-anchor="middle" font-family="Outfit, sans-serif">12 months</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 03 — New parts only -->
+                    <article class="panel">
+                        <div class="panel-inner">
+                            <div class="panel-copy">
+                                <span class="panel-num">03&nbsp;/&nbsp;04</span>
+                                <h2 class="panel-h">New parts <span class="accent">only.</span></h2>
+                                <p class="panel-sub">Genuine-grade OEM components, never refurbished.</p>
+                                <p class="panel-p">We fit high-quality OEM parts — held to the same standard as the originals — so your device performs exactly like it should. Because we source smart, that quality reaches you at a noticeably lower price than the big chains charge. Great parts, fair cost, none of the refurbished guesswork.</p>
+                            </div>
+                            <div class="panel-diagram" aria-hidden="true">
+                                <svg viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="40" y="58" width="120" height="100" rx="12" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M40 84h120" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+                                    <rect x="86" y="44" width="28" height="28" rx="6" fill="rgba(72,202,228,0.16)" stroke="currentColor" stroke-width="2"/>
+                                    <text x="100" y="128" font-size="16" fill="currentColor" font-weight="700" text-anchor="middle" font-family="Outfit, sans-serif">OEM</text>
+                                    <path d="M168 52l3.2 7 7 3.2-7 3.2-3.2 7-3.2-7-7-3.2 7-3.2z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 04 — Physical location -->
+                    <article class="panel">
+                        <div class="panel-inner">
+                            <div class="panel-copy">
+                                <span class="panel-num">04&nbsp;/&nbsp;04</span>
+                                <h2 class="panel-h">Physical <span class="accent">location.</span></h2>
+                                <p class="panel-sub">Find us in the Chelsea shopping strip.</p>
+                                <p class="panel-p">We're not a faceless mail-in service. We're a real shop in the Chelsea shopping strip — walk in, hand it over the counter, and talk to the person who'll actually be doing the repair. Pop by any time during opening hours.</p>
+                                <button class="panel-btn" type="button">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M3 11l19-9-9 19-2-8-8-2z"/>
+                                    </svg>
+                                    Get directions
+                                </button>
+                            </div>
+                            <div class="panel-diagram" aria-hidden="true">
+                                <svg viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="24" y="40" width="172" height="120" rx="12" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
+                                    <path d="M24 110c40-8 70 14 100 4s50-26 72-18" stroke="currentColor" stroke-width="1.5" opacity="0.3" stroke-dasharray="5 6"/>
+                                    <path d="M120 58c-18 0-32 14-32 32 0 24 32 50 32 50s32-26 32-50c0-18-14-32-32-32z" fill="rgba(72,202,228,0.12)" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="120" cy="90" r="11" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+                <div class="scroller-dots" aria-hidden="true">
+                    <span class="scroller-dot active"></span>
+                    <span class="scroller-dot"></span>
+                    <span class="scroller-dot"></span>
+                    <span class="scroller-dot"></span>
+                </div>
             </div>
-
-            <p class="pitch-line pitch-line--end">That means less problems not more.</p>
         </div>
     </section>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
